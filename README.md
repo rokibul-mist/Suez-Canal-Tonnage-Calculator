@@ -10,6 +10,12 @@ An official, regulation-grade marine software application for computing **Suez C
 
 ---
 
+### 🌐 Live Public Link
+You can test and use the application directly online at:  
+👉 **[https://7d08c23f8ee025.lhr.life](https://7d08c23f8ee025.lhr.life)**
+
+---
+
 ## 📌 Key Capabilities & Calculation Modules
 
 1. **Underdeck Tonnage (UDT) Calculation**:

@@ -100,14 +100,35 @@ def compute_and_update_overall_tonnage():
     prop_vol = float(super_res.get("propelling_power_volume", 0.0) or 0.0)
     prop_ton = float(super_res.get("propelling_power_tonnage", 0.0) or 0.0)
 
-    # SCA Rule: Propelling power deduction CANNOT EXCEED 50% of Gross Tonnage
+    # SCA Rule (Art. 94): Non-propelling deductions CANNOT EXCEED 10% of Gross Tonnage
+    non_prop_raw_ton = off_ton + crew_ton + work_ton
+    non_prop_raw_vol = off_vol + crew_vol + work_vol
+    non_prop_cap = round(gross_ton * 0.10, 2)
+    non_prop_was_capped = non_prop_raw_ton > non_prop_cap
+    if non_prop_was_capped:
+        ratio = non_prop_cap / non_prop_raw_ton if non_prop_raw_ton > 0 else 1.0
+        off_ton_eff = round(off_ton * ratio, 2)
+        crew_ton_eff = round(crew_ton * ratio, 2)
+        work_ton_eff = round(work_ton * ratio, 2)
+        off_vol_eff = round(off_ton_eff * 2.832, 3)
+        crew_vol_eff = round(crew_ton_eff * 2.832, 3)
+        work_vol_eff = round(work_ton_eff * 2.832, 3)
+        non_prop_ton_capped = off_ton_eff + crew_ton_eff + work_ton_eff
+        non_prop_vol_capped = off_vol_eff + crew_vol_eff + work_vol_eff
+    else:
+        non_prop_ton_capped = non_prop_raw_ton
+        non_prop_vol_capped = non_prop_raw_vol
+        off_ton_eff, crew_ton_eff, work_ton_eff = off_ton, crew_ton, work_ton
+        off_vol_eff, crew_vol_eff, work_vol_eff = off_vol, crew_vol, work_vol
+
+    # SCA Rule (Art. 94.D): Propelling power deduction CANNOT EXCEED 50% of Gross Tonnage
     prop_ton_cap = round(gross_ton * 0.50, 2)
     prop_ton_capped = min(prop_ton, prop_ton_cap)
     prop_vol_capped = round(prop_ton_capped * 2.832, 3)
     prop_was_capped = prop_ton > prop_ton_cap
 
-    tot_ded_vol = off_vol + crew_vol + work_vol + prop_vol_capped
-    tot_ded_ton = off_ton + crew_ton + work_ton + prop_ton_capped
+    tot_ded_vol = non_prop_vol_capped + prop_vol_capped
+    tot_ded_ton = non_prop_ton_capped + prop_ton_capped
 
     net_vol = max(0.0, gross_vol - tot_ded_vol)
     net_ton = max(0.0, gross_ton - tot_ded_ton)
@@ -120,15 +141,20 @@ def compute_and_update_overall_tonnage():
         "round_houses": {"volume": round(rh_vol, 3), "tonnage": round(rh_ton, 2)},
         "gross_tonnage": {"volume": round(gross_vol, 3), "tonnage": round(gross_ton, 2)},
         "deductions": {
-            "officers": {"volume": round(off_vol, 3), "tonnage": round(off_ton, 2)},
-            "crew": {"volume": round(crew_vol, 3), "tonnage": round(crew_ton, 2)},
-            "working_ship": {"volume": round(work_vol, 3), "tonnage": round(work_ton, 2)},
+            "officers": {"volume": round(off_vol_eff, 3), "tonnage": round(off_ton_eff, 2)},
+            "crew": {"volume": round(crew_vol_eff, 3), "tonnage": round(crew_ton_eff, 2)},
+            "working_ship": {"volume": round(work_vol_eff, 3), "tonnage": round(work_ton_eff, 2)},
+            "non_propelling_cap": {
+                "applied": non_prop_was_capped,
+                "limit_10pct": round(non_prop_cap, 2),
+                "original_tonnage": round(non_prop_raw_ton, 2)
+            },
             "propelling_power": {
                 "volume": round(prop_vol_capped, 3),
                 "tonnage": round(prop_ton_capped, 2),
                 "original_tonnage": round(prop_ton, 2),
                 "cap_applied": prop_was_capped,
-                "cap_limit": round(prop_ton_cap, 2)
+                "cap_limit_50pct": round(prop_ton_cap, 2)
             },
             "total": {"volume": round(tot_ded_vol, 3), "tonnage": round(tot_ded_ton, 2)}
         },

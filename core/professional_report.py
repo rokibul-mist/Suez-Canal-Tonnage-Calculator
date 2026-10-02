@@ -191,8 +191,30 @@ def generate_pdf_table_report(output_pdf_path, udt_data, bulb_data, vessel_info,
     hatch_cover_tons = hatch_exc_tons if (has_hatches and hatch_exc_tons > 0) else 0.0
 
     gross_tonnage = udt_tons + bulb_cover_tons + fc_cover_tons + rh_cover_tons + hatch_cover_tons
-    net_tonnage = max(0.0, gross_tonnage - tot_ded_ton)
     gross_vol = udt_vol + bulb_vol + fc_vol + tot_rh_vol + hatch_exc_vol
+
+    # Statutory Caps per SCA Art. 94 & USCG WI C3-05:
+    # 1. Non-propelling deductions <= 10% Gross Tonnage
+    non_prop_raw_ton = off_acc_ton + crew_acc_ton + work_ship_ton
+    non_prop_cap = round(gross_tonnage * 0.10, 2)
+    if non_prop_raw_ton > non_prop_cap and non_prop_raw_ton > 0:
+        ratio = non_prop_cap / non_prop_raw_ton
+        off_acc_ton = round(off_acc_ton * ratio, 2)
+        crew_acc_ton = round(crew_acc_ton * ratio, 2)
+        work_ship_ton = round(work_ship_ton * ratio, 2)
+        off_v = round(off_acc_ton * 2.832, 3)
+        crew_v = round(crew_acc_ton * 2.832, 3)
+        work_v = round(work_ship_ton * 2.832, 3)
+
+    # 2. Propelling power deduction <= 50% Gross Tonnage
+    prop_ton_cap = round(gross_tonnage * 0.50, 2)
+    if prop_power_ton > prop_ton_cap:
+        prop_power_ton = prop_ton_cap
+        prop_v = round(prop_power_ton * 2.832, 3)
+
+    tot_ded_ton = off_acc_ton + crew_acc_ton + work_ship_ton + prop_power_ton
+    tot_d_v = off_v + crew_v + work_v + prop_v
+    net_tonnage = max(0.0, gross_tonnage - tot_ded_ton)
     net_vol = max(0.0, gross_vol - tot_d_v)
 
     # =========================================================================
@@ -339,7 +361,7 @@ def generate_pdf_table_report(output_pdf_path, udt_data, bulb_data, vessel_info,
         Paragraph("<b>1. MEASUREMENT PROCEDURES EXECUTED (WHAT WAS DONE):</b><br/>"
                   "&bull; <b>Under Deck Tonnage (UDT):</b> Computed via Simpson's 1st Rule over 21 transverse stations (dx = LBP / 20) with 16 vertical intervals per station (h = D / 16). Transom appendix volume aft of AP included.<br/>"
                   "&bull; <b>Appendages &amp; Enclosed Superstructures:</b> Bulbous bow calculated per SCA Method A (transverse cuts at St. 20, A, B and forward conical nose cap V<sub>nose</sub> = (&pi;/6)&times;A<sub>B</sub>&times;L<sub>nose</sub>). Forecastle deck integrated from transverse offsets. Cargo hatchways excess calculated applying 0.5% (5&permil;) Gross Tonnage statutory allowance. Round houses enclosed spaces schedule aggregated.<br/>"
-                  "&bull; <b>Gross &amp; Net Tonnage:</b> Gross Tonnage obtained by summing UDT and all additions; Net Tonnage obtained by deducting statutory spaces (Officers, Crew, Navigation, and Propelling Power capped at &le; 50% GT).", note_sec_style),
+                  "&bull; <b>Gross &amp; Net Tonnage:</b> Gross Tonnage obtained by summing UDT and all additions; Net Tonnage obtained by deducting statutory spaces (Non-propelling capped at &le; 10% GT, Propelling Power capped at &le; 50% GT per SCA Art. 94 &amp; USCG WI C3-05).", note_sec_style),
         Paragraph("<b>2. SUMMARY OF CALCULATED VALUES &amp; TONNAGES (WHAT WAS OBTAINED):</b><br/>"
                   f"&bull; <b>Under Deck Tonnage (UDT):</b> Volume = <b>{udt_vol:,.2f} m&sup3;</b> &nbsp;&rArr;&nbsp; Tonnage = <b>{udt_tons:,.2f} Suez Tons</b><br/>"
                   f"&bull; <b>Bulbous Bow:</b> Volume = <b>{bulb_vol:,.2f} m&sup3;</b> &nbsp;&rArr;&nbsp; Tonnage = <b>{bulb_cover_tons:,.2f} Suez Tons</b>" + (f" <i>(Fitted)</i>" if (has_bulb and bulb_tons > 0) else " <i>(None / Exempt)</i>") + "<br/>"

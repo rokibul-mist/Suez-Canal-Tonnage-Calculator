@@ -98,6 +98,38 @@ def calculate_transverse_station_area(station_name, waterlines, hb_dict, depth=1
         "rows": rows
     }
 
+def get_suez_tonnage_deck_classification(length_m):
+    """
+    Determines the Suez Canal / Constantinople 1873 Tonnage Deck Classification
+    per Article 2, Table 1:
+      Class 1: L <= 50 ft (15.24 m)       -> 4 divisions
+      Class 2: 50 < L <= 120 ft (36.58 m) -> 6 divisions
+      Class 3: 120 < L <= 180 ft (54.86m) -> 8 divisions
+      Class 4: 180 < L <= 225 ft (68.58m) -> 10 divisions
+      Class 5: L > 225 ft (68.58 m)       -> 12 divisions
+    Footnote 8 permits any greater even number of divisions (e.g. 20 divisions / 21 stations).
+    """
+    length_ft = length_m * 3.28084
+    if length_ft <= 50.0:
+        c, divs = 1, 4
+    elif length_ft <= 120.0:
+        c, divs = 2, 6
+    elif length_ft <= 180.0:
+        c, divs = 3, 8
+    elif length_ft <= 225.0:
+        c, divs = 4, 10
+    else:
+        c, divs = 5, 12
+    return {
+        "class": c,
+        "length_m": round(length_m, 2),
+        "length_ft": round(length_ft, 2),
+        "statutory_min_divisions": divs,
+        "actual_divisions": 20,
+        "footnote_8_compliant": True,
+        "rule_reference": f"SCA Art. 2 Table 1 (Class {c}, min {divs} divs; 20 even divs applied per Footnote 8)"
+    }
+
 def calculate_underdeck_tonnage(parsed_data, lbp=186.10, default_depth=17.80):
     """
     Integrates all transverse stations, then integrates longitudinally from St. 0 to St. 20.
@@ -178,6 +210,7 @@ def calculate_underdeck_tonnage(parsed_data, lbp=186.10, default_depth=17.80):
 
     return {
         "lbp": lbp,
+        "classification": get_suez_tonnage_deck_classification(lbp),
         "dx": round(dx, 3),
         "dx_over_3": round(dx_over_3, 4),
         "main_hull_sum_products": round(long_sum_products, 3),

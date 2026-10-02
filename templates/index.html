@@ -1,0 +1,1355 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Navigation handled by left sidebar in base.html -->
+
+
+<!-- ===================================================================== -->
+<!-- TAB 1: SHIP PARTICULARS & APPENDAGE FEATURE CONFIGURATOR -->
+<!-- ===================================================================== -->
+<div id="tab-config" class="tab-content">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 mb-5 border-b border-slate-200">
+            <div>
+                <h2 class="text-lg font-bold text-navy-800">1. Ship Particulars & Appendage Configuration</h2>
+                <p class="text-xs text-slate-500">Official certificate data, main dimensions, and dynamic appendage calculation selection.</p>
+            </div>
+            
+        
+            <div class="flex space-x-2 mt-3 sm:mt-0">
+                <button onclick="clearTab1()" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-1.5 px-3 rounded border border-rose-200 shadow-sm flex items-center space-x-1.5 transition"><span>&#215; Clear Data</span></button>
+            </div>
+        </div>
+
+        <!-- Section A: Official Certificate Identity Information -->
+        <div class="mb-6">
+            <h3 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-3">Ship Identification & Official Certificate Particulars</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Name of Ship</label>
+                    <input type="text" id="cfg-vessel-name" value="" placeholder="e.g. MV VESSEL NAME" class="w-full text-xs font-bold border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nationality / Flag</label>
+                    <input type="text" id="cfg-nationality" value="" placeholder="e.g. BAHAMAS" class="w-full text-xs font-semibold border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Kind of Ship</label>
+                    <input type="text" id="cfg-kind-of-ship" value="" placeholder="e.g. BULK CARRIER" class="w-full text-xs font-semibold border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Official Number</label>
+                    <input type="text" id="cfg-official-number" value="" placeholder="e.g. 7000085" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Signal Letters</label>
+                    <input type="text" id="cfg-signal-letters" value="" placeholder="e.g. C6R 2092" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Port of Registry</label>
+                    <input type="text" id="cfg-port-of-registry" value="" placeholder="e.g. NASSAU" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Keel Laying Date</label>
+                    <input type="text" id="cfg-keel-date" value="" placeholder="e.g. 7 JUNE 2006" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Date of Launch</label>
+                    <input type="text" id="cfg-launch-date" value="" placeholder="e.g. 15 DEC 2006" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Built Where</label>
+                    <input type="text" id="cfg-built-where" value="" placeholder="e.g. COCHIN, INDIA" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Material of Hull</label>
+                    <input type="text" id="cfg-material-hull" value="" placeholder="e.g. STEEL" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Name of Builder</label>
+                    <input type="text" id="cfg-builder" value="" placeholder="e.g. Shipyard Name" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Engine Type & Count</label>
+                    <input type="text" id="cfg-engine" value="" placeholder="e.g. DIESEL ENGINE : ONE" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Propellers</label>
+                    <input type="text" id="cfg-propellers" value="" placeholder="e.g. SCREW PROPELLER : ONE" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div class="sm:col-span-2 lg:col-span-3">
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Certificate Hull / Yard Note</label>
+                    <input type="text" id="cfg-hull-note" value="" placeholder="e.g. CSL HULL NO. 017" class="w-full text-xs border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+            </div>
+        </div>
+
+        <!-- Section B: Main Dimensions -->
+        <div class="mb-6">
+            <h3 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-3">Main Dimensions (Meters)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Length Between Perpendiculars (Lbp, m)</label>
+                    <input type="number" step="0.001" id="cfg-lbp" value="" placeholder="0.000" class="w-full text-sm font-semibold border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Breadth Moulded (B, m)</label>
+                    <input type="number" step="0.001" id="cfg-breadth" value="" placeholder="0.000" class="w-full text-sm font-semibold border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Depth Moulded (D, m)</label>
+                    <input type="number" step="0.001" id="cfg-depth" value="" placeholder="0.000" class="w-full text-sm font-semibold border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800">
+                </div>
+            </div>
+        </div>
+
+        <!-- Section C: Appendage & Superstructure Feature Selection (The 4 Toggles) -->
+        <div class="mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-xs font-bold text-slate-600 uppercase tracking-wider">Appendage & Superstructure Modules Selection</h3>
+                <span class="text-[11px] text-slate-500">Enable or disable vessel features. Disabled tabs are hidden and omitted from calculation.</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Toggle 1: Bulbous Bow -->
+                <div class="p-4 rounded-xl border-2 transition bg-slate-50 border-slate-200" id="card-toggle-bulbous">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black uppercase text-navy-900 flex items-center">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-600 mr-2"></span>Bulbous Bow
+                        </span>
+                        <select id="toggle-bulbous" onchange="applyFeatureToggles()" class="text-xs font-bold rounded-lg border-slate-300 px-2.5 py-1 bg-white shadow-sm border focus:ring-1 focus:ring-navy-800">
+                            <option value="yes" selected>YES (Active)</option>
+                            <option value="no">NO (None)</option>
+                        </select>
+                    </div>
+                    <p class="text-[11px] text-slate-500">Calculates Station A, B area and nose volume integration into underdeck/gross tonnage.</p>
+                </div>
+
+                <!-- Toggle 2: Forecastle -->
+                <div class="p-4 rounded-xl border-2 transition bg-slate-50 border-slate-200" id="card-toggle-forecastle">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black uppercase text-navy-900 flex items-center">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-600 mr-2"></span>Forecastle Deck
+                        </span>
+                        <select id="toggle-forecastle" onchange="applyFeatureToggles()" class="text-xs font-bold rounded-lg border-slate-300 px-2.5 py-1 bg-white shadow-sm border focus:ring-1 focus:ring-navy-800">
+                            <option value="yes" selected>YES (Active)</option>
+                            <option value="no">NO (None)</option>
+                        </select>
+                    </div>
+                    <p class="text-[11px] text-slate-500">Calculates forward forecastle deck longitudinal volume & tonnage addition to Gross Tonnage.</p>
+                </div>
+
+                <!-- Toggle 3: Cargo Hatchways -->
+                <div class="p-4 rounded-xl border-2 transition bg-slate-50 border-slate-200" id="card-toggle-hatches">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black uppercase text-navy-900 flex items-center">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-600 mr-2"></span>Cargo Hatchways
+                        </span>
+                        <select id="toggle-hatches" onchange="applyFeatureToggles()" class="text-xs font-bold rounded-lg border-slate-300 px-2.5 py-1 bg-white shadow-sm border focus:ring-1 focus:ring-navy-800">
+                            <option value="yes" selected>YES (Active)</option>
+                            <option value="no">NO (None)</option>
+                        </select>
+                    </div>
+                    <p class="text-[11px] text-slate-500">Calculates aggregate cargo hatch volume and 0.5% SCA statutory allowance excess addition.</p>
+                </div>
+
+                <!-- Toggle 4: Round Houses -->
+                <div class="p-4 rounded-xl border-2 transition bg-slate-50 border-slate-200" id="card-toggle-roundhouses">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-black uppercase text-navy-900 flex items-center">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-600 mr-2"></span>Round Houses, etc.
+                        </span>
+                        <select id="toggle-roundhouses" onchange="applyFeatureToggles()" class="text-xs font-bold rounded-lg border-slate-300 px-2.5 py-1 bg-white shadow-sm border focus:ring-1 focus:ring-navy-800">
+                            <option value="yes" selected>YES (Active)</option>
+                            <option value="no">NO (None)</option>
+                        </select>
+                    </div>
+                    <p class="text-[11px] text-slate-500">Calculates accommodation round houses, deckhouses (Gross Addition) and statutory Net deductions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section D: Offset Template Grid Configurator (Collapsible) -->
+        <details class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+            <summary class="font-bold text-xs text-navy-800 uppercase tracking-wider cursor-pointer hover:text-navy-900">
+                Advanced: Shipyard Offset Table Setup & Generator (Stations, Waterlines & Buttocks)
+            </summary>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
+                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-xs font-bold text-navy-800 uppercase">Stations List</label>
+                        <span id="cfg-station-count" class="text-[10px] font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">29 Stations</span>
+                    </div>
+                    <textarea id="cfg-stations" rows="4" class="w-full text-xs font-mono p-2 border border-slate-300 rounded bg-slate-50">Transom, 0, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 18.5, 19, 19.5, 20, A, B</textarea>
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-xs font-bold text-navy-800 uppercase">Waterlines</label>
+                        <span id="cfg-wl-count" class="text-[10px] font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">19 Lines</span>
+                    </div>
+                    <textarea id="cfg-waterlines" rows="4" class="w-full text-xs font-mono p-2 border border-slate-300 rounded bg-slate-50">BL, 500WL, 1000WL, 2000WL, 3000WL, 4000WL, 5000WL, 6000WL, 7000WL, 8000WL, 9000WL, 10000WL, 11000WL, 12000WL, 14000WL, 16000WL, Upper Deck Side, Forecastle Deck Side, Bulwark Top Line</textarea>
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-xs font-bold text-navy-800 uppercase">Buttocks</label>
+                        <span id="cfg-bt-count" class="text-[10px] font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">13 Lines</span>
+                    </div>
+                    <textarea id="cfg-buttocks" rows="4" class="w-full text-xs font-mono p-2 border border-slate-300 rounded bg-slate-50">C.L., 1000 B.L., 2000 B.L., 4000 B.L., 6000 B.L., 8000 B.L., 10000 B.L., 12000 B.L., 14000 B.L., Flat of Bottom, Upper Deck Height, Forecastle Deck Height, Bulwark Top Height</textarea>
+                </div>
+            </div>
+            <div class="flex justify-end pt-3 mt-3 border-t border-slate-200">
+                <button onclick="generateBlankTemplate()" id="btn-gen-template" class="bg-navy-800 hover:bg-navy-900 text-white font-bold py-2 px-5 rounded-lg text-xs shadow flex items-center space-x-2 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Generate Blank Offset Template (.xlsx)</span>
+                </button>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- TAB 2: IMPORT & READ FILLED OFFSET EXCEL -->
+<!-- ===================================================================== -->
+<div id="tab-upload" class="tab-content hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <!-- Header & Top Action Controls Bar -->
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center pb-4 mb-5 border-b border-slate-200 gap-4">
+            <div>
+                <h2 class="text-lg font-bold text-navy-800">2. Table of Offsets &amp; Section Lines Web Grid</h2>
+                <p class="text-xs text-slate-500">Interactive web spreadsheet for all 29 transverse stations, section waterlines, and buttocks. Directly input or edit numbers here to calculate underdeck and appendage tonnages.</p>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="loadStandardOffsetsToGrid()" class="bg-navy-800 hover:bg-navy-900 text-white font-bold py-2 px-3.5 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <span>Load Standard Shipyard Offsets</span>
+                </button>
+                <button onclick="clearOffsetGrid()" class="bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-2 px-3 rounded-lg text-xs border border-rose-200 shadow-sm flex items-center space-x-1 transition">
+                    <span>&#215; Clear Grid</span>
+                </button>
+                <button onclick="proceedToCalculateUDT()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <span>Calculate All &amp; Proceed &rarr;</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mode Bar & Quick Stats -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-50 p-3 rounded-lg border border-slate-200 mb-4 gap-3">
+            <div class="flex items-center space-x-2">
+                <span class="text-xs font-bold text-slate-600 uppercase tracking-wide">View / Edit:</span>
+                <button type="button" onclick="setGridMode('hb')" id="btn-grid-hb" class="px-3 py-1.5 rounded-md text-xs font-bold bg-navy-800 text-white shadow-sm transition">
+                    Half-Breadths (Waterlines)
+                </button>
+                <button type="button" onclick="setGridMode('ht')" id="btn-grid-ht" class="px-3 py-1.5 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 transition">
+                    Heights (Buttocks / Decks)
+                </button>
+                <button type="button" onclick="setGridMode('all')" id="btn-grid-all" class="px-3 py-1.5 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:bg-slate-100 transition">
+                    Full Combined Table
+                </button>
+            </div>
+            
+            <div class="flex items-center space-x-3 text-xs">
+                <span class="text-slate-500 font-medium">Unit: <strong class="text-navy-800 font-mono">mm</strong> (Millimeters)</span>
+                <span class="text-slate-300">|</span>
+                <span class="text-slate-500">Stations: <strong id="grid-stat-stations" class="text-navy-800 font-bold">29</strong></span>
+                <span class="text-slate-300">|</span>
+                <span class="text-slate-500"><strong id="grid-stat-cols" class="text-navy-800 font-bold">17 Waterlines</strong></span>
+            </div>
+        </div>
+
+        <!-- The Spreadsheet Table Grid -->
+        <div class="border border-slate-300 rounded-lg overflow-hidden shadow-sm bg-white mb-4">
+            <div class="overflow-x-auto max-h-[580px] relative">
+                <table id="web-offset-grid" class="min-w-full text-xs border-collapse">
+                    <thead id="grid-thead" class="sticky top-0 z-10 bg-slate-100 shadow-sm border-b border-slate-300"></thead>
+                    <tbody id="grid-tbody" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bottom Action Bar & Optional Excel Dropzone / Exporter -->
+        <div class="flex flex-col sm:flex-row justify-between items-center bg-slate-50 p-4 rounded-xl border border-slate-200 gap-3">
+            <div class="flex items-center space-x-3">
+                <button type="button" onclick="toggleImportDropzone()" class="text-xs text-slate-600 hover:text-navy-800 font-semibold underline flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    <span>Optional: Import external Excel file (.xlsx)</span>
+                </button>
+                <span class="text-slate-300">|</span>
+                <button type="button" onclick="exportGridToExcel()" class="text-xs text-emerald-700 hover:text-emerald-900 font-bold flex items-center space-x-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Export this Grid to Excel (.xlsx)</span>
+                </button>
+            </div>
+            
+            <button onclick="proceedToCalculateUDT()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-5 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                <span>Save Offsets &amp; Proceed to Calculate UDT &rarr;</span>
+            </button>
+        </div>
+
+        <!-- Collapsible Dropzone (for users who optionally want to upload an xlsx) -->
+        <div id="optional-dropzone-panel" class="hidden mt-4 p-4 border border-dashed border-slate-300 rounded-lg bg-slate-50">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div>
+                    <p class="text-xs font-bold text-slate-800">Upload external spreadsheet into this web grid:</p>
+                    <p class="text-[11px] text-slate-500">Supports shipyard .xlsx files. Values will populate directly into the grid above.</p>
+                </div>
+                <input type="file" id="file-input" class="text-xs text-slate-600 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-navy-800 file:text-white hover:file:bg-navy-900" accept=".xlsx,.csv">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="tab-udt" class="tab-content hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 mb-5 border-b border-slate-200">
+            <div>
+                <h2 class="text-lg font-bold text-navy-800">3. Under Deck Suez Tonnage (UDT) Integration</h2>
+                <p class="text-xs text-slate-500">Simpson's 1st Rule applied transversely (17 waterlines) and longitudinally (Station 0 to Station 20) with Aft Transom appendix.</p>
+            </div>
+            <button onclick="calculateUDT()" id="btn-calc-udt" class="mt-3 sm:mt-0 bg-navy-800 hover:bg-navy-900 text-white font-bold py-2.5 px-6 rounded-lg text-sm shadow flex items-center space-x-2 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                <span>Calculate Under Deck Tonnage</span>
+            </button>
+        </div>
+            <button onclick="clearTab3()" class="mt-3 sm:mt-0 bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-2.5 px-4 rounded-lg text-xs border border-rose-200 shadow-sm flex items-center space-x-2 transition"><span>&#215; Clear Data</span></button>
+
+        <!-- Key Metrics Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Under Deck Tonnage (UDT)</div>
+                <div id="card-udt-tons" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-amber-700 font-semibold mt-0.5">Suez Moorsom Tons (V / 2.83)</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Enclosed Volume</div>
+                <div id="card-udt-vol" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">m3 (Main Hull + Transom)</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Common Interval (dx)</div>
+                <div id="card-udt-dx" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">Meters (Lbp / 20)</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Transom Appendix Volume</div>
+                <div id="card-udt-transom" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">m3 (Aft of AP to -4.50 m)</div>
+            </div>
+        </div>
+
+        <!-- Sectional Area Curve Chart -->
+        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-xs font-bold text-navy-800 uppercase tracking-wider">Sectional Area Curve (SAC) - Cross-Sectional Area Distribution</h3>
+                <span class="text-xs font-semibold text-slate-500">Stations 0 (AP) to 20 (FP)</span>
+            </div>
+            <div class="h-64 w-full">
+                <canvas id="sacChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Longitudinal Main Hull Table -->
+        <div class="border border-slate-200 rounded-lg overflow-hidden mb-6">
+            <div class="bg-navy-800 text-white px-4 py-2.5 text-xs font-bold flex justify-between items-center">
+                <span>LONGITUDINAL INTEGRATION TABLE (STATION 0 TO STATION 20)</span>
+                <span>Simpson's 1st Rule Multipliers: 1-4-2-4...1</span>
+            </div>
+            <div class="overflow-x-auto max-h-80">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 sticky top-0 font-bold">
+                        <tr>
+                            <th class="px-3 py-2 text-center">St. No.</th>
+                            <th class="px-3 py-2 text-left">Station Name</th>
+                            <th class="px-3 py-2 text-right">Position x (m)</th>
+                            <th class="px-3 py-2 text-right">Depth D (m)</th>
+                            <th class="px-3 py-2 text-right">Area (m2)</th>
+                            <th class="px-3 py-2 text-center">Factor</th>
+                            <th class="px-3 py-2 text-right">Product (A x M)</th>
+                            <th class="px-3 py-2 text-left">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody id="udt-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Station Transverse Area Inspector (Waterlines & Heights) -->
+        <div class="border border-slate-200 rounded-xl overflow-hidden bg-slate-50 p-5">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 mb-4 border-b border-slate-200">
+                <div>
+                    <h3 class="text-sm font-bold text-navy-800">Station Transverse Area Detailed Calculator</h3>
+                    <p class="text-xs text-slate-500">Inspect the 17-waterline transverse integration table for any selected station, including waterline heights above baseline.</p>
+                </div>
+                <div class="flex items-center space-x-2 mt-2 sm:mt-0">
+                    <label for="select-transverse-st" class="text-xs font-bold text-slate-700">Select Station:</label>
+                    <select id="select-transverse-st" onchange="displaySelectedStationTransverse()" class="border border-slate-300 rounded-lg p-1.5 text-xs font-bold bg-white text-navy-800 shadow-sm focus:ring-2 focus:ring-navy-600">
+                    </select>
+                </div>
+            </div>
+
+            <div class="border border-slate-200 rounded-lg overflow-hidden bg-white">
+                <div class="bg-slate-100 px-4 py-2 text-xs font-bold text-slate-700 border-b border-slate-200 flex justify-between items-center">
+                    <span id="transverse-st-title">STATION TRANSVERSE INTEGRATION</span>
+                    <span id="transverse-st-meta" class="text-[11px] font-normal text-slate-600"></span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-xs divide-y divide-slate-200">
+                        <thead class="bg-slate-50 text-slate-700 font-bold">
+                            <tr>
+                                <th class="px-3 py-2 text-center">Pt</th>
+                                <th class="px-3 py-2 text-left">Waterline</th>
+                                <th class="px-3 py-2 text-right">Waterline Height Z (m)</th>
+                                <th class="px-3 py-2 text-right">Half-Breadth (m)</th>
+                                <th class="px-3 py-2 text-right">Full Breadth B (m)</th>
+                                <th class="px-3 py-2 text-center">Factor</th>
+                                <th class="px-3 py-2 text-right">Product (B x Factor)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transverse-st-tbody" class="divide-y divide-slate-200 bg-white"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- TAB 4: BULBOUS BOW SECTION -->
+<!-- ===================================================================== -->
+<div id="tab-bulbous" class="tab-content hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 mb-5 border-b border-slate-200">
+            <div>
+                <h2 class="text-lg font-bold text-navy-800">4. Dedicated Bulbous Bow Section</h2>
+                <p class="text-xs text-slate-500">Transverse cross-sectional areas using cutting points at Centerline (C.L.), 1000 B.L., and 2000 B.L., with longitudinal volume integration over 5.00 m.</p>
+            </div>
+            <div class="flex items-center space-x-3 mt-3 sm:mt-0">
+                <button onclick="calculateBulbousBow()" id="btn-calc-bulb" class="bg-navy-800 hover:bg-navy-900 text-white font-bold py-2.5 px-5 rounded-lg text-sm shadow flex items-center space-x-2 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <span>Calculate Bulbous Bow</span>
+                </button>
+                <button onclick="exportBulbousExcel()" id="btn-export-bulb-excel" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-5 rounded-lg text-sm shadow flex items-center space-x-2 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download Bulbous Bow Excel (.xlsx)</span>
+                </button>
+            </div>
+            <button onclick="clearTab4()" class="mt-3 sm:mt-0 bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-2.5 px-4 rounded-lg text-xs border border-rose-200 shadow-sm flex items-center space-x-2 transition"><span>&#215; Clear Data</span></button>
+        </div>
+
+        <!-- Bulbous Bow Fitted Option -->
+        <div class="mb-5 p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <div>
+                <label for="bb-has-bulbous" class="font-bold text-navy-800 text-sm">Vessel Bulbous Bow Fitted?</label>
+                <p class="text-xs text-slate-500">Select whether the vessel hull design has a bulbous bow or a conventional straight bow.</p>
+            </div>
+            <select id="bb-has-bulbous" onchange="toggleBulbousInputs()" class="border border-slate-300 rounded-lg p-2 font-bold text-sm bg-white text-navy-800 shadow-sm focus:ring-2 focus:ring-navy-600">
+                <option value="yes" selected>YES - Fitted with Bulbous Bow</option>
+                <option value="no">NO - Conventional Bow (No Bulb)</option>
+            </select>
+        </div>
+
+        <!-- Offset Table Mapping Card for Bulbous Bow -->
+        <div id="bb-mapping-panel" class="mb-6 p-4 bg-gradient-to-r from-slate-50 to-blue-50/30 border border-slate-200 rounded-xl">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 mb-3 border-b border-slate-200 gap-2">
+                <div>
+                    <h3 class="text-xs font-bold text-navy-800 uppercase tracking-wider flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-navy-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path></svg>
+                        Offset Table Mapping: Station &amp; Buttock Selection
+                    </h3>
+                    <p class="text-[11px] text-slate-500">Select which transverse stations and buttock columns from the active Offset Table are used for bulb cuts.</p>
+                </div>
+                <button type="button" onclick="pullBulbousFromOffsets()" id="btn-pull-bulb" class="bg-navy-800 hover:bg-navy-900 text-white font-bold py-1.5 px-3.5 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    <span>Pull Cutting Data from Offset Table</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Station selection -->
+                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                    <h4 class="text-[11px] font-bold text-slate-700 uppercase tracking-wide mb-2 flex items-center gap-1">
+                        <span>&#9679;</span> Transverse Integration Stations:
+                    </h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Station 1 (FP)</label>
+                            <select id="bb-sel-st1" onchange="pullBulbousFromOffsets()" class="w-full text-xs font-bold border-slate-300 rounded p-1.5 bg-slate-50 border focus:ring-1 focus:ring-navy-800">
+                                <option value="20" selected>St. 20 (FP)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Station 2 (Mid)</label>
+                            <select id="bb-sel-st2" onchange="pullBulbousFromOffsets()" class="w-full text-xs font-bold border-slate-300 rounded p-1.5 bg-slate-50 border focus:ring-1 focus:ring-navy-800">
+                                <option value="A" selected>St. A</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Station 3 (Fore)</label>
+                            <select id="bb-sel-st3" onchange="pullBulbousFromOffsets()" class="w-full text-xs font-bold border-slate-300 rounded p-1.5 bg-slate-50 border focus:ring-1 focus:ring-navy-800">
+                                <option value="B" selected>St. B</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttock selection -->
+                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                    <h4 class="text-[11px] font-bold text-slate-700 uppercase tracking-wide mb-2 flex items-center gap-1">
+                        <span>&#9679;</span> Transverse Cutting Buttocks:
+                    </h4>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Buttock 1 (y=0m)</label>
+                            <select id="bb-sel-bt1" onchange="pullBulbousFromOffsets()" class="w-full text-xs font-bold border-slate-300 rounded p-1.5 bg-slate-50 border focus:ring-1 focus:ring-navy-800">
+                                <option value="C.L." selected>C.L.</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Buttock 2 (y=1m)</label>
+                            <select id="bb-sel-bt2" onchange="pullBulbousFromOffsets()" class="w-full text-xs font-bold border-slate-300 rounded p-1.5 bg-slate-50 border focus:ring-1 focus:ring-navy-800">
+                                <option value="1000 B.L." selected>1000 B.L.</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Buttock 3 (y=2m)</label>
+                            <select id="bb-sel-bt3" onchange="pullBulbousFromOffsets()" class="w-full text-xs font-bold border-slate-300 rounded p-1.5 bg-slate-50 border focus:ring-1 focus:ring-navy-800">
+                                <option value="2000 B.L." selected>2000 B.L.</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bulb Parameters Grid -->
+        <div id="bb-params-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Total Bulb Length (m)</label>
+                <input type="number" step="0.01" id="bb-len" value="5.00" placeholder="5.00" class="w-full text-lg font-bold border-slate-300 rounded p-1.5 bg-white border">
+                <span class="text-[11px] text-slate-500">From FP (St. 20) to foremost tip</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">St. 20 to St. B Spacing (m)</label>
+                <input type="number" step="0.01" id="bb-dx-body" value="1.50" placeholder="1.50" class="w-full text-lg font-bold border-slate-300 rounded p-1.5 bg-white border">
+                <span class="text-[11px] text-slate-500">1.50 m per division (St 20 to A to B)</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Fore Nose Length (m)</label>
+                <input type="number" step="0.01" id="bb-l-nose" value="2.00" placeholder="2.00" class="w-full text-lg font-bold border-slate-300 rounded p-1.5 bg-white border">
+                <span class="text-[11px] text-slate-500">St. B to foremost apex tip</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Transverse Buttock Spacing (m)</label>
+                <input type="number" step="0.01" id="bb-dy" value="1.00" placeholder="1.00" class="w-full text-lg font-bold border-slate-300 rounded p-1.5 bg-white border">
+                <span class="text-[11px] text-slate-500">dy = 1.0 m (C.L., 1000BL, 2000BL)</span>
+            </div>
+        </div>
+
+        <!-- Bulb Results KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-blue-50/60 p-4 rounded-xl border border-blue-200">
+                <div class="text-xs font-semibold text-blue-900 uppercase tracking-wider">Bulbous Bow Tonnage</div>
+                <div id="card-bb-tonnage" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-blue-700 font-semibold mt-0.5">Suez Moorsom Tons (Method A)</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Enclosed Volume</div>
+                <div id="card-bb-vol" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">m3 (Body 73.38 + Nose 9.64)</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Station A Area (Mid)</div>
+                <div id="card-bb-area-a" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">m2 (at x = 1.50 m)</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Station B Area (Fore)</div>
+                <div id="card-bb-area-b" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">m2 (at x = 3.00 m)</div>
+            </div>
+        </div>
+
+        <!-- Table 1: Station 20 Transverse Area Calculation Table -->
+        <div class="border border-slate-200 rounded-lg overflow-hidden mb-5">
+            <div class="bg-navy-800 text-white px-4 py-2.5 text-xs font-bold flex justify-between items-center">
+                <span>STATION 20 TRANSVERSE AREA CALCULATION</span>
+                <span>Simpson's 1st Rule (1-4-1, dy = 1.00 m)</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="px-3 py-2 text-left">Buttock Line</th>
+                            <th class="px-3 py-2 text-right">Half-Breadth Y (m)</th>
+                            <th class="px-3 py-2 text-right">Upper Z (m)</th>
+                            <th class="px-3 py-2 text-right">Lower Z (m)</th>
+                            <th class="px-3 py-2 text-right">Depth D (m)</th>
+                            <th class="px-3 py-2 text-center">Factor</th>
+                            <th class="px-3 py-2 text-right">Product (D x M)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bulb-st20-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Table 2: Station A Transverse Area Calculation Table -->
+        <div class="border border-slate-200 rounded-lg overflow-hidden mb-5">
+            <div class="bg-navy-800 text-white px-4 py-2.5 text-xs font-bold flex justify-between items-center">
+                <span>STATION A TRANSVERSE AREA CALCULATION</span>
+                <span>Simpson's 1st Rule (1-4-1, dy = 1.00 m)</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="px-3 py-2 text-left">Buttock Line</th>
+                            <th class="px-3 py-2 text-right">Half-Breadth Y (m)</th>
+                            <th class="px-3 py-2 text-right">Upper Z (m)</th>
+                            <th class="px-3 py-2 text-right">Lower Z (m)</th>
+                            <th class="px-3 py-2 text-right">Depth D (m)</th>
+                            <th class="px-3 py-2 text-center">Factor</th>
+                            <th class="px-3 py-2 text-right">Product (D x M)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bulb-stA-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Table 3: Station B Transverse Area Calculation Table -->
+        <div class="border border-slate-200 rounded-lg overflow-hidden mb-5">
+            <div class="bg-navy-800 text-white px-4 py-2.5 text-xs font-bold flex justify-between items-center">
+                <span>STATION B TRANSVERSE AREA CALCULATION</span>
+                <span>Simpson's 1st Rule (1-4-1, dy = 1.00 m)</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="px-3 py-2 text-left">Buttock Line</th>
+                            <th class="px-3 py-2 text-right">Half-Breadth Y (m)</th>
+                            <th class="px-3 py-2 text-right">Upper Z (m)</th>
+                            <th class="px-3 py-2 text-right">Lower Z (m)</th>
+                            <th class="px-3 py-2 text-right">Depth D (m)</th>
+                            <th class="px-3 py-2 text-center">Factor</th>
+                            <th class="px-3 py-2 text-right">Product (D x M)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bulb-stB-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Table 4: Bulbous Bow Volume and Tonnage Calculation Table -->
+        <div class="border border-slate-200 rounded-lg overflow-hidden mb-6">
+            <div class="bg-navy-800 text-white px-4 py-2.5 text-xs font-bold flex justify-between items-center">
+                <span>BULBOUS BOW VOLUME AND TONNAGE CALCULATION</span>
+                <span>Longitudinal Simpson Integration & Fore Nose Cap</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="px-3 py-2 text-left">Station</th>
+                            <th class="px-3 py-2 text-right">Position X (m)</th>
+                            <th class="px-3 py-2 text-right">Transverse Area (m2)</th>
+                            <th class="px-3 py-2 text-center">Factor</th>
+                            <th class="px-3 py-2 text-right">Product (A x M)</th>
+                            <th class="px-3 py-2 text-left">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bulb-long-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- TAB 5: FORECASTLE DECK CALCULATION SECTION -->
+<!-- ===================================================================== -->
+<div id="tab-forecastle" class="tab-content hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 mb-5 border-b border-slate-200">
+            <div>
+                <h2 class="text-lg font-bold text-navy-800">5. Forecastle Deck Tonnage Calculation</h2>
+                <p class="text-xs text-slate-500">Meters only: Full Breadth B = 2 x Half-Breadth (FCS). Section Area = B x Height. Longitudinal Simpson integration along Forecastle length.</p>
+            </div>
+            <button onclick="calculateForecastle()" id="btn-calc-fc" class="mt-3 sm:mt-0 bg-navy-800 hover:bg-navy-900 text-white font-bold py-2.5 px-6 rounded-lg text-sm shadow flex items-center space-x-2 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <span>Calculate Forecastle Tonnage</span>
+            </button>
+        </div>
+            <button onclick="clearTab5()" class="mt-3 sm:mt-0 bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-2.5 px-4 rounded-lg text-xs border border-rose-200 shadow-sm flex items-center space-x-2 transition"><span>&#215; Clear Data</span></button>
+
+        <!-- Forecastle Fitted Option -->
+        <div class="mb-5 p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <div>
+                <label for="fc-has-forecastle" class="font-bold text-navy-800 text-sm">Vessel Forecastle Fitted?</label>
+                <p class="text-xs text-slate-500">Select whether the vessel has an enclosed forecastle deck structure or is flush deck.</p>
+            </div>
+            <select id="fc-has-forecastle" onchange="toggleForecastleInputs()" class="border border-slate-300 rounded-lg p-2 font-bold text-sm bg-white text-navy-800 shadow-sm focus:ring-2 focus:ring-navy-600">
+                <option value="yes" selected>YES - Fitted with Forecastle Deck</option>
+                <option value="no">NO - Flush Deck (No Forecastle)</option>
+            </select>
+        </div>
+
+        <!-- Offset Table Mapping Card for Forecastle -->
+        <div id="fc-mapping-panel" class="mb-6 p-4 bg-gradient-to-r from-slate-50 to-emerald-50/30 border border-slate-200 rounded-xl">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 mb-3 border-b border-slate-200 gap-2">
+                <div>
+                    <h3 class="text-xs font-bold text-navy-800 uppercase tracking-wider flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-emerald-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path></svg>
+                        Offset Table Mapping: Column &amp; Station Selection
+                    </h3>
+                    <p class="text-[11px] text-slate-500">Select which offset table column (Deck Side / Waterline) and station range to pull half-breadths from.</p>
+                </div>
+                <button type="button" onclick="pullForecastleFromOffsets()" id="btn-pull-fc" class="bg-navy-800 hover:bg-navy-900 text-white font-bold py-1.5 px-3.5 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    <span>Pull Forecastle Data from Offset Table</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                    <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wide mb-1">Offset Column for Breadths</label>
+                    <select id="fc-sel-column" onchange="pullForecastleFromOffsets()" class="w-full text-xs font-bold border-slate-300 rounded p-1.5 bg-slate-50 border focus:ring-1 focus:ring-navy-800">
+                        <option value="Upper Deck Side" selected>Upper Deck Side</option>
+                    </select>
+                    <span class="text-[10px] text-slate-500 mt-1 block">Uses half-breadth values in millimeters</span>
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                    <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wide mb-1">Start Station (Aft boundary)</label>
+                    <select id="fc-sel-start-st" onchange="pullForecastleFromOffsets()" class="w-full text-xs font-bold border-slate-300 rounded p-1.5 bg-slate-50 border focus:ring-1 focus:ring-navy-800">
+                        <option value="17" selected>Station 17</option>
+                    </select>
+                    <span class="text-[10px] text-slate-500 mt-1 block">Aft bulkhead start boundary</span>
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                    <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wide mb-1">End Station (Fore boundary)</label>
+                    <select id="fc-sel-end-st" onchange="pullForecastleFromOffsets()" class="w-full text-xs font-bold border-slate-300 rounded p-1.5 bg-slate-50 border focus:ring-1 focus:ring-navy-800">
+                        <option value="B" selected>Station B (Foremost tip)</option>
+                    </select>
+                    <span class="text-[10px] text-slate-500 mt-1 block">Foremost stem/apex boundary</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forecastle Import / Parameters Grid -->
+        <div id="fc-params-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-amber-50/70 p-4 rounded-xl border border-amber-200">
+                <label class="block text-xs font-semibold text-amber-900 uppercase tracking-wider mb-1">Imported Height H (m)</label>
+                <input type="number" step="0.01" id="fc-height-input" value="2.60" placeholder="2.60" class="w-full text-lg font-bold border-amber-300 rounded p-1.5 bg-white border text-navy-800">
+                <span class="text-[11px] text-amber-800">Forecastle Height across stations</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Common Interval dx (m)</label>
+                <input type="number" step="0.001" id="fc-dx-input" value="9.305" placeholder="9.305" readonly class="w-full text-lg font-bold border-slate-200 rounded p-1.5 bg-slate-100 border text-slate-700">
+                <span class="text-[11px] text-slate-500">Lbp / 20 = 9.305 m</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Half-Station dx/2 (m)</label>
+                <input type="number" step="0.0001" id="fc-dx-half" value="4.6525" placeholder="4.6525" readonly class="w-full text-lg font-bold border-slate-200 rounded p-1.5 bg-slate-100 border text-slate-700">
+                <span class="text-[11px] text-slate-500">Sub-spacing for half stations</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Stations Included</label>
+                <div class="text-sm font-bold text-navy-800 mt-2">St. 17 to St. B</div>
+                <span class="text-[11px] text-slate-500">Full, Half, and Overhang A/B</span>
+            </div>
+        </div>
+
+        <!-- Forecastle KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                <div class="text-xs font-semibold text-emerald-900 uppercase tracking-wider">Forecastle Tonnage</div>
+                <div id="card-fc-tonnage" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-emerald-700 font-semibold mt-0.5">Suez Moorsom Tons (V / 2.83)</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Forecastle Volume</div>
+                <div id="card-fc-vol" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">m3 (Body + Stem Overhang)</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Sum of Products</div>
+                <div id="card-fc-sum-prod" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">Integrated Area x Factors</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Body Volume (St 18-20)</div>
+                <div id="card-fc-vol-body" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">m3 (461.44 Suez Tons)</div>
+            </div>
+        </div>
+
+        <!-- Single Forecastle Calculation Table (Meters Only) -->
+        <div class="border border-slate-200 rounded-lg overflow-hidden mb-6">
+            <div class="bg-navy-800 text-white px-4 py-2.5 text-xs font-bold flex justify-between items-center">
+                <span>FORECASTLE DECK CALCULATION TABLE (ALL STATIONS IN METERS)</span>
+                <span>Full Breadth B = 2 x Half-Breadth | Area A = B x H</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="px-3 py-2 text-center">No.</th>
+                            <th class="px-3 py-2 text-left">Station</th>
+                            <th class="px-3 py-2 text-center">Type</th>
+                            <th class="px-3 py-2 text-right">Position X (m)</th>
+                            <th class="px-3 py-2 text-right">Half-Breadth y (m)</th>
+                            <th class="px-3 py-2 text-right">Full Breadth B (m)</th>
+                            <th class="px-3 py-2 text-right">Height H (m)</th>
+                            <th class="px-3 py-2 text-right">Section Area A (m2)</th>
+                            <th class="px-3 py-2 text-center">Factor</th>
+                            <th class="px-3 py-2 text-right">Product (A x Factor)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fc-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- TAB 6: HATCH COAMINGS & COVERS SECTION -->
+<!-- ===================================================================== -->
+<div id="tab-hatches" class="tab-content hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 mb-5 border-b border-slate-200">
+            <div>
+                <h2 class="text-lg font-bold text-navy-800">6. Cargo Hatchways & Coamings Calculation</h2>
+                <p class="text-xs text-slate-500">Configure cargo hatch covers dimensions and apply Suez Canal Authority (SCA) statutory 0.5% (5 per 1000) allowance rule.</p>
+            </div>
+            <div class="flex items-center space-x-2 mt-3 sm:mt-0">
+                <button onclick="calculateHatchCoamings()" id="btn-calc-hatches" class="bg-navy-800 hover:bg-navy-900 text-white font-bold py-2 px-4 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    <span>Calculate Hatch Coamings</span>
+                </button>
+                <button onclick="exportHatchExcel()" id="btn-export-hatch-excel" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download Hatch Excel (.xlsx)</span>
+                </button>
+            </div>
+            <button onclick="clearTab6()" class="bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-2 px-4 rounded-lg text-xs border border-rose-200 shadow-sm flex items-center space-x-1.5 transition"><span>&#215; Clear</span></button>
+        </div>
+
+        <!-- Hatch Configuration Bar -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Number of Hatch Covers</label>
+                <div class="flex items-center space-x-2">
+                    <input type="number" id="hatch-count-input" value="5" min="1" max="20" class="w-24 text-base font-bold text-navy-800 border-slate-300 rounded-lg p-2 bg-white border focus:ring-1 focus:ring-navy-800" onchange="onHatchCountChange()">
+                    <button onclick="onHatchCountChange()" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold px-2.5 py-2 rounded border border-slate-300">Set Count</button>
+                </div>
+                <span class="text-[11px] text-slate-500 mt-1 block">Adjust to generate input rows</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Moorsom Divisor</label>
+                <div class="text-base font-bold text-navy-800 mt-1">2.83 m3 / Ton</div>
+                <span class="text-[11px] text-slate-500">100 cubic feet standard rule</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">SCA Statutory Allowance</label>
+                <div class="text-base font-bold text-navy-800 mt-1">0.5% (5 / 1000)</div>
+                <span class="text-[11px] text-slate-500">Of Gross Tonnage before hatch addition</span>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Preset Action</label>
+                <button onclick="clearHatches()" class="mt-1 w-full text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2 px-3 rounded border border-slate-300 shadow-sm">
+                    Clear All Hatches
+                </button>
+            </div>
+        </div>
+
+        <!-- Hatch KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Hatchways Volume</div>
+                <div id="card-hatch-total-vol" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">m3 (Aggregate L x B x H)</div>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                <div class="text-xs font-semibold text-blue-900 uppercase tracking-wider">Aggregate Hatch Tonnage</div>
+                <div id="card-hatch-total-ton" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-blue-700 font-semibold mt-0.5">Suez Moorsom Tons (V / 2.83)</div>
+            </div>
+            <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+                <div class="text-xs font-semibold text-amber-900 uppercase tracking-wider">0.5% Statutory Allowance</div>
+                <div id="card-hatch-allowance-ton" class="text-2xl font-black text-amber-950 mt-1">--</div>
+                <div class="text-[11px] text-amber-700 font-semibold mt-0.5">Exempted Tonnage (0.005 x Pre-Hatch GT)</div>
+            </div>
+            <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                <div class="text-xs font-semibold text-emerald-900 uppercase tracking-wider">Excess Added to Gross</div>
+                <div id="card-hatch-excess-ton" class="text-2xl font-black text-emerald-950 mt-1">--</div>
+                <div class="text-[11px] text-emerald-700 font-semibold mt-0.5">Added to Suez Gross Tonnage</div>
+            </div>
+        </div>
+
+        <!-- Interactive Hatches Table -->
+        <div class="border border-slate-200 rounded-lg overflow-hidden mb-6">
+            <div class="bg-navy-800 text-white px-4 py-2.5 text-xs font-bold flex justify-between items-center">
+                <span>CARGO HATCH COAMINGS & COVERS DIMENSION & TONNAGE TABLE</span>
+                <span>Volume = L x B x H | Tonnage = Volume / 2.83</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="px-3 py-2 text-center w-12">No.</th>
+                            <th class="px-3 py-2 text-left">Hatchway Description</th>
+                            <th class="px-3 py-2 text-center w-36">Length L (m)</th>
+                            <th class="px-3 py-2 text-center w-36">Breadth B (m)</th>
+                            <th class="px-3 py-2 text-center w-36">Height H (m)</th>
+                            <th class="px-3 py-2 text-right w-40">Volume (m3)</th>
+                            <th class="px-3 py-2 text-right w-44">Tonnage (Suez Tons)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hatch-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- TAB 7: ROUND HOUSES & ENCLOSED SUPERSTRUCTURES SECTION -->
+<!-- ===================================================================== -->
+<div id="tab-superstructure" class="tab-content hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 mb-5 border-b border-slate-200">
+            <div>
+                <h2 class="text-lg font-bold text-navy-800">7. Round Houses & Enclosed Superstructures Calculation</h2>
+                <p class="text-xs text-slate-500">Calculate enclosed deckhouses, round houses, and statutory deductions (officers, crew, working ship, propelling power) under SCA Rules.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 mt-3 sm:mt-0">
+                <input type="file" id="super-excel-file" class="hidden" accept=".xlsx" onchange="uploadSuperstructureExcel(this)">
+                <button type="button" onclick="document.getElementById('super-excel-file').click()" id="btn-import-super-excel" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    <span>Import Excel (.xlsx)</span>
+                </button>
+                <button onclick="addSuperstructureRow()" id="btn-add-super-row" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2 px-3 rounded-lg text-xs border border-slate-300 flex items-center space-x-1.5 shadow-sm transition">
+                    <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    <span>Add Space</span>
+                </button>
+                <button onclick="calculateSuperstructures()" id="btn-calc-super" class="bg-navy-800 hover:bg-navy-900 text-white font-bold py-2 px-4 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    <span>Recalculate</span>
+                </button>
+                <button onclick="loadDefaultSuperstructures()" id="btn-reset-super" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2 px-3 rounded-lg text-xs border border-slate-300 flex items-center space-x-1.5 shadow-sm transition">
+                    <span>Reset 53 Spaces</span>
+                </button>
+                <button onclick="exportSuperstructureExcel()" id="btn-export-super-excel" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-3.5 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download Excel</span>
+                </button>
+            </div>
+            <button onclick="clearTab7()" class="bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-2 px-3 rounded-lg text-xs border border-rose-200 flex items-center space-x-1.5 shadow-sm transition"><span>&#215; Clear</span></button>
+        </div>
+
+        <!-- Superstructure KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                <div class="text-xs font-semibold text-emerald-700 uppercase tracking-wider">Suez Canal Gross Tonnage (GT)</div>
+                <div id="card-super-add-vol" class="text-2xl font-black text-emerald-900 mt-1">--</div>
+                <div class="flex justify-between items-center text-[11px] text-emerald-700 mt-0.5">
+                    <span>Enclosed Vol m3</span>
+                    <span id="card-super-add-ton" class="font-bold">-- Tons</span>
+                </div>
+            </div>
+            <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+                <div class="text-xs font-semibold text-amber-700 uppercase tracking-wider">Total Statutory Deductions</div>
+                <div id="card-super-ded-vol" class="text-2xl font-black text-amber-900 mt-1">--</div>
+                <div class="flex justify-between items-center text-[11px] text-amber-700 mt-0.5">
+                    <span>Deducted Vol m3</span>
+                    <span id="card-super-ded-ton" class="font-bold">-- Tons</span>
+                </div>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                <div class="text-xs font-semibold text-blue-700 uppercase tracking-wider">Net Balance Volume</div>
+                <div id="card-super-net-vol" class="text-2xl font-black text-blue-900 mt-1">--</div>
+                <div class="text-[11px] text-blue-700 mt-0.5">Gross m3 - Deductions m3</div>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div class="text-xs font-semibold text-navy-800 uppercase tracking-wider">Suez Canal Net Tonnage (NT)</div>
+                <div id="card-super-net-ton" class="text-2xl font-black text-navy-800 mt-1">--</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">Official SCA Certificate Net Tons</div>
+            </div>
+        </div>
+
+        <!-- Superstructure Space Table -->
+        <div class="border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+            <div class="bg-navy-800 text-white font-bold text-xs px-4 py-2.5 flex justify-between items-center">
+                <span>ROUND HOUSES & ENCLOSED SPACES SCHEDULE (53 GA SPACES)</span>
+                <span>Volume = Qty x L x B x H x Factor k | Suez Moorsom Tonnage = Volume / 2.83</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="px-2 py-2 text-center w-10">No.</th>
+                            <th class="px-2 py-2 text-left w-32">Deck Level</th>
+                            <th class="px-2 py-2 text-left">Space Description / Group</th>
+                            <th class="px-2 py-2 text-center w-16">Qty</th>
+                            <th class="px-2 py-2 text-center w-20">Length L (m)</th>
+                            <th class="px-2 py-2 text-center w-20">Breadth B (m)</th>
+                            <th class="px-2 py-2 text-center w-20">Height H (m)</th>
+                            <th class="px-2 py-2 text-center w-20">Factor k</th>
+                            <th class="px-2 py-2 text-right w-24">Volume (m3)</th>
+                            <th class="px-2 py-2 text-center w-32">Action</th>
+                            <th class="px-2 py-2 text-center w-48">Statutory Category</th>
+                            <th class="px-2 py-2 text-right w-24">Tonnage (Tons)</th>
+                            <th class="px-2 py-2 text-center w-10">Del</th>
+                        </tr>
+                    </thead>
+                    <tbody id="superstructure-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                    <tfoot class="bg-slate-50 font-bold text-xs divide-y divide-slate-200">
+                        <tr class="bg-emerald-50/70 text-emerald-900">
+                            <td colspan="8" class="px-4 py-2 text-left font-bold uppercase tracking-wider">Total Round Houses, etc. (Gross Tonnage Addition)</td>
+                            <td id="tfoot-super-add-vol" class="px-2 py-2 text-right font-bold font-mono">--</td>
+                            <td class="px-2 py-2 text-center"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-100 text-emerald-800 font-bold uppercase">GROSS ADDITION</span></td>
+                            <td></td>
+                            <td id="tfoot-super-add-ton" class="px-2 py-2 text-right font-bold font-mono">--</td>
+                            <td></td>
+                        </tr>
+                        <tr class="bg-amber-50/50 text-amber-950">
+                            <td colspan="8" class="px-4 py-2 text-left font-medium">Officer's Accommodation Deduction</td>
+                            <td id="tfoot-super-off-vol" class="px-2 py-2 text-right font-mono">--</td>
+                            <td class="px-2 py-2 text-center text-[10px] text-amber-800">OFFICERS</td>
+                            <td></td>
+                            <td id="tfoot-super-off-ton" class="px-2 py-2 text-right font-mono">--</td>
+                            <td></td>
+                        </tr>
+                        <tr class="bg-amber-50/50 text-amber-950">
+                            <td colspan="8" class="px-4 py-2 text-left font-medium">Crew's Accommodation Deduction</td>
+                            <td id="tfoot-super-crew-vol" class="px-2 py-2 text-right font-mono">--</td>
+                            <td class="px-2 py-2 text-center text-[10px] text-amber-800">CREW</td>
+                            <td></td>
+                            <td id="tfoot-super-crew-ton" class="px-2 py-2 text-right font-mono">--</td>
+                            <td></td>
+                        </tr>
+                        <tr class="bg-amber-50/50 text-amber-950">
+                            <td colspan="8" class="px-4 py-2 text-left font-medium">Used in Working the Ship (Navigation / Safety) Deduction</td>
+                            <td id="tfoot-super-work-vol" class="px-2 py-2 text-right font-mono">--</td>
+                            <td class="px-2 py-2 text-center text-[10px] text-amber-800">WORKING SHIP</td>
+                            <td></td>
+                            <td id="tfoot-super-work-ton" class="px-2 py-2 text-right font-mono">--</td>
+                            <td></td>
+                        </tr>
+                        <tr class="bg-amber-50/50 text-amber-950">
+                            <td colspan="8" class="px-4 py-2 text-left font-medium">Deduction for Propelling Power (Machinery / Workshops)</td>
+                            <td id="tfoot-super-prop-vol" class="px-2 py-2 text-right font-mono">--</td>
+                            <td class="px-2 py-2 text-center text-[10px] text-amber-800">PROPELLING</td>
+                            <td></td>
+                            <td id="tfoot-super-prop-ton" class="px-2 py-2 text-right font-mono">--</td>
+                            <td></td>
+                        </tr>
+                        <tr class="bg-amber-100 text-amber-950 font-bold border-t border-amber-300">
+                            <td colspan="8" class="px-4 py-2 text-left font-bold uppercase tracking-wider">Total Statutory Deductions (Net Tonnage)</td>
+                            <td id="tfoot-super-ded-vol" class="px-2 py-2 text-right font-bold font-mono">--</td>
+                            <td class="px-2 py-2 text-center"><span class="px-2 py-0.5 rounded text-[10px] bg-amber-200 text-amber-900 font-bold uppercase">DEDUCTION</span></td>
+                            <td></td>
+                            <td id="tfoot-super-ded-ton" class="px-2 py-2 text-right font-bold font-mono">--</td>
+                            <td></td>
+                        </tr>
+                        <tr class="bg-slate-100 text-slate-900 font-black border-t-2 border-slate-300">
+                            <td colspan="8" class="px-4 py-2 text-left font-black uppercase tracking-wider">Net Balance (Additions - Deductions)</td>
+                            <td id="tfoot-super-net-vol" class="px-2 py-2 text-right font-black font-mono">--</td>
+                            <td class="px-2 py-2 text-center"><span class="px-2 py-0.5 rounded text-[10px] bg-blue-100 text-blue-800 font-bold uppercase">NET</span></td>
+                            <td></td>
+                            <td id="tfoot-super-net-ton" class="px-2 py-2 text-right font-black font-mono">--</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- SECTION 7B: SUEZ CANAL GROSS TONNAGE ADDITION CALCULATION -->
+        <!-- ============================================================= -->
+        <div class="mt-8 border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+            <div class="bg-navy-800 text-white font-bold text-xs px-4 py-3 flex justify-between items-center">
+                <span class="tracking-wider uppercase">Suez Canal Gross Tonnage Addition Calculation (SCA Rules Art. 93)</span>
+                <span class="text-[11px] text-slate-300">Underdeck + Bulbous + Forecastle + Hatch Excess + Round Houses</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="px-3 py-2.5 text-center w-12">No.</th>
+                            <th class="px-4 py-2.5 text-left">Item / Component Description</th>
+                            <th class="px-4 py-2.5 text-center w-48">Statutory Regulation</th>
+                            <th class="px-4 py-2.5 text-right w-44">Enclosed Volume (m³)</th>
+                            <th class="px-4 py-2.5 text-right w-44">Suez Moorsom Tonnage (Tons)</th>
+                            <th class="px-4 py-2.5 text-left">Remarks / Calculation Basis</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 bg-white">
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2 text-center font-bold text-slate-500">1</td>
+                            <td class="px-4 py-2 font-bold text-navy-800">Under the Tonnage Deck (UDT)</td>
+                            <td class="px-4 py-2 text-center text-slate-600 bg-slate-50">SCA Rules Art. 93 Para 1</td>
+                            <td id="gt-row-udt-vol" class="px-4 py-2 text-right font-mono font-semibold">--</td>
+                            <td id="gt-row-udt-ton" class="px-4 py-2 text-right font-mono font-bold text-navy-800">--</td>
+                            <td class="px-4 py-2 text-slate-600">Main Hull &amp; Transom Appendix (Simpson Integration)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2 text-center font-bold text-slate-500">2</td>
+                            <td class="px-4 py-2 font-bold text-navy-800">Bulbous Bow</td>
+                            <td class="px-4 py-2 text-center text-slate-600 bg-slate-50">SCA Appendix 1</td>
+                            <td id="gt-row-bulb-vol" class="px-4 py-2 text-right font-mono font-semibold">--</td>
+                            <td id="gt-row-bulb-ton" class="px-4 py-2 text-right font-mono font-bold text-navy-800">--</td>
+                            <td class="px-4 py-2 text-slate-600">Method A (Drawing Exact Geometry: Body + Nose Cap)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2 text-center font-bold text-slate-500">3</td>
+                            <td class="px-4 py-2 font-bold text-navy-800">Forecastle Deck</td>
+                            <td class="px-4 py-2 text-center text-slate-600 bg-slate-50">SCA Rules Art. 93 Para 2</td>
+                            <td id="gt-row-fc-vol" class="px-4 py-2 text-right font-mono font-semibold">--</td>
+                            <td id="gt-row-fc-ton" class="px-4 py-2 text-right font-mono font-bold text-navy-800">--</td>
+                            <td class="px-4 py-2 text-slate-600">Enclosed Forecastle Space (Station 18 to St. A)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2 text-center font-bold text-slate-500">4</td>
+                            <td class="px-4 py-2 font-bold text-navy-800">Cargo Hatchways Excess</td>
+                            <td class="px-4 py-2 text-center text-slate-600 bg-slate-50">SCA Rules Art. 93 Para 3</td>
+                            <td id="gt-row-hatch-vol" class="px-4 py-2 text-right font-mono font-semibold">--</td>
+                            <td id="gt-row-hatch-ton" class="px-4 py-2 text-right font-mono font-bold text-navy-800">--</td>
+                            <td class="px-4 py-2 text-slate-600">Excess over Statutory 0.5% Gross Allowance</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2 text-center font-bold text-slate-500">5</td>
+                            <td class="px-4 py-2 font-bold text-navy-800">Round Houses &amp; Enclosed Superstructures</td>
+                            <td class="px-4 py-2 text-center text-slate-600 bg-slate-50">SCA Rules Art. 93 Para 4</td>
+                            <td id="gt-row-rh-vol" class="px-4 py-2 text-right font-mono font-semibold">--</td>
+                            <td id="gt-row-rh-ton" class="px-4 py-2 text-right font-mono font-bold text-navy-800">--</td>
+                            <td class="px-4 py-2 text-slate-600">Enclosed Deckhouses, Bridge &amp; Accommodations</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="bg-navy-900 text-white font-black text-xs border-t-2 border-navy-700">
+                        <tr>
+                            <td colspan="3" class="px-4 py-3 text-left uppercase tracking-wider text-amber-300">TOTAL SUEZ CANAL GROSS TONNAGE (GT)</td>
+                            <td id="gt-row-total-vol" class="px-4 py-3 text-right font-mono text-white text-sm">--</td>
+                            <td id="gt-row-total-ton" class="px-4 py-3 text-right font-mono text-amber-400 text-base font-black">--</td>
+                            <td class="px-4 py-3 text-slate-300 font-normal">Official SCA Certificate Gross (Total Enclosed Volume / 2.83)</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- SECTION 7C: SUEZ CANAL NET TONNAGE DEDUCTION CALCULATION -->
+        <!-- ============================================================= -->
+        <div class="mt-8 border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+            <div class="bg-slate-800 text-white font-bold text-xs px-4 py-3 flex justify-between items-center">
+                <span class="tracking-wider uppercase">Suez Canal Net Tonnage Deduction Calculation (SCA Rules Art. 94)</span>
+                <span class="text-[11px] text-slate-300">Officers + Crew + Working Ship + Propelling Power Deductions</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-xs divide-y divide-slate-200">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr>
+                            <th class="px-3 py-2.5 text-center w-12">No.</th>
+                            <th class="px-4 py-2.5 text-left">Statutory Deduction Category</th>
+                            <th class="px-4 py-2.5 text-center w-48">Statutory Regulation</th>
+                            <th class="px-4 py-2.5 text-right w-44">Deducted Volume (m³)</th>
+                            <th class="px-4 py-2.5 text-right w-44">Deducted Tonnage (Tons)</th>
+                            <th class="px-4 py-2.5 text-left">Remarks / Statutory Limits</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 bg-white">
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2 text-center font-bold text-slate-500">1</td>
+                            <td class="px-4 py-2 font-bold text-slate-800">Officer's Accommodation</td>
+                            <td class="px-4 py-2 text-center text-slate-600 bg-slate-50">SCA Rules Art. 94 Para 1</td>
+                            <td id="nt-row-off-vol" class="px-4 py-2 text-right font-mono font-semibold">--</td>
+                            <td id="nt-row-off-ton" class="px-4 py-2 text-right font-mono font-bold text-amber-800">--</td>
+                            <td class="px-4 py-2 text-slate-600">Master, Navigating &amp; Engineer Officers Cabins, Mess &amp; Dayrooms</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2 text-center font-bold text-slate-500">2</td>
+                            <td class="px-4 py-2 font-bold text-slate-800">Crew's Accommodation</td>
+                            <td class="px-4 py-2 text-center text-slate-600 bg-slate-50">SCA Rules Art. 94 Para 2</td>
+                            <td id="nt-row-crew-vol" class="px-4 py-2 text-right font-mono font-semibold">--</td>
+                            <td id="nt-row-crew-ton" class="px-4 py-2 text-right font-mono font-bold text-amber-800">--</td>
+                            <td class="px-4 py-2 text-slate-600">Seamen, Motormen, Cook Cabins, Mess, Galley, Hospital &amp; Sanitary</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2 text-center font-bold text-slate-500">3</td>
+                            <td class="px-4 py-2 font-bold text-slate-800">Used in Working the Ship</td>
+                            <td class="px-4 py-2 text-center text-slate-600 bg-slate-50">SCA Rules Art. 94 Para 3</td>
+                            <td id="nt-row-work-vol" class="px-4 py-2 text-right font-mono font-semibold">--</td>
+                            <td id="nt-row-work-ton" class="px-4 py-2 text-right font-mono font-bold text-amber-800">--</td>
+                            <td class="px-4 py-2 text-slate-600">Wheelhouse, Chartroom, Radio, Battery, Steering Gear, Safety &amp; Offices</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-3 py-2 text-center font-bold text-slate-500">4</td>
+                            <td class="px-4 py-2 font-bold text-slate-800">Deduction for Propelling Power</td>
+                            <td class="px-4 py-2 text-center text-slate-600 bg-slate-50">SCA Rules Art. 94 Para 4</td>
+                            <td id="nt-row-prop-vol" class="px-4 py-2 text-right font-mono font-semibold">--</td>
+                            <td id="nt-row-prop-ton" class="px-4 py-2 text-right font-mono font-bold text-amber-800">--</td>
+                            <td class="px-4 py-2 text-slate-600">Machinery Rooms, Purifiers, Workshops, Light &amp; Air casings</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="divide-y divide-slate-200">
+                        <tr class="bg-amber-50/90 text-amber-950 font-bold border-t-2 border-amber-300">
+                            <td colspan="3" class="px-4 py-2.5 text-left uppercase tracking-wider">TOTAL STATUTORY DEDUCTIONS</td>
+                            <td id="nt-row-total-vol" class="px-4 py-2.5 text-right font-mono text-sm">--</td>
+                            <td id="nt-row-total-ton" class="px-4 py-2.5 text-right font-mono text-sm font-bold text-amber-900">--</td>
+                            <td class="px-4 py-2.5 text-slate-600 font-normal">Total Allowable Non-Cargo Deductions from Gross Tonnage</td>
+                        </tr>
+                        <tr class="bg-slate-900 text-white font-black text-xs border-t-2 border-slate-700">
+                            <td colspan="3" class="px-4 py-3 text-left uppercase tracking-wider text-emerald-400">TOTAL SUEZ CANAL NET TONNAGE (NT)</td>
+                            <td id="nt-row-net-vol" class="px-4 py-3 text-right font-mono text-white text-sm">--</td>
+                            <td id="nt-row-net-ton" class="px-4 py-3 text-right font-mono text-emerald-400 text-base font-black">--</td>
+                            <td class="px-4 py-3 text-slate-300 font-normal">Official SCA Certificate Net (Gross Tonnage - Total Deductions)</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- TAB 8: EXPORT PROFESSIONAL REPORTS & MASTER EXCEL -->
+<!-- ===================================================================== -->
+<div id="tab-export" class="tab-content hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <!-- Header & Action Controls Bar -->
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center pb-4 mb-5 border-b border-slate-200 gap-4">
+            <div>
+                <h2 class="text-lg font-bold text-navy-800">8. Official Certificate & Reports Preview</h2>
+                <p class="text-xs text-slate-500">Preview and inspect the complete official Suez Canal Tonnage Measurement Calculation Report before downloading.</p>
+            </div>
+            
+            <!-- Quick Toolbar -->
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="loadReportPreview(true)" id="btn-refresh-preview" class="bg-navy-800 hover:bg-navy-900 text-white font-bold py-2 px-3.5 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    <span>Refresh Preview</span>
+                </button>
+                <button onclick="exportPdfReport()" id="btn-export-pdf" class="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-3.5 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <span>Download PDF</span>
+                </button>
+                <button onclick="exportMasterExcel()" id="btn-export-excel" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-3.5 rounded-lg text-xs shadow flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download Excel</span>
+                </button>
+                <button onclick="printReportPreview()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-3 rounded-lg text-xs border border-slate-300 shadow-sm flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    <span>Print</span>
+                </button>
+                <button onclick="openReportNewTab()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-3 rounded-lg text-xs border border-slate-300 shadow-sm flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    <span>New Tab</span>
+                </button>
+                <button onclick="clearTab8()" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold py-2 px-2.5 rounded-lg border border-rose-200 shadow-sm flex items-center space-x-1 transition">
+                    <span>&#215; Reset</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Embedded Interactive Report Viewer Card -->
+        <div class="border border-slate-300 rounded-xl overflow-hidden shadow bg-slate-50 mb-6">
+            <!-- Viewer Sub-Header / Status Bar -->
+            <div class="bg-slate-800 text-white px-4 py-2.5 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-semibold gap-2">
+                <div class="flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="font-bold tracking-wide">LIVE CALCULATION SHEETS &amp; CERTIFICATE PREVIEW</span>
+                    <span class="hidden md:inline text-[11px] text-slate-300 font-normal">| 100% Monochrome Official SCA Format</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <!-- Zoom Controls -->
+                    <span class="text-[11px] text-slate-300">Zoom:</span>
+                    <button type="button" onclick="zoomReportPreview(-0.1)" class="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs" title="Zoom Out">-</button>
+                    <span id="preview-zoom-label" class="text-[11px] font-mono text-slate-200 w-10 text-center">100%</span>
+                    <button type="button" onclick="zoomReportPreview(0.1)" class="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs" title="Zoom In">+</button>
+                    <button type="button" onclick="resetReportZoom()" class="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-[10px] text-slate-300" title="Reset Zoom">1:1</button>
+                </div>
+            </div>
+
+            <!-- Iframe Container with Loading Indicator -->
+            <div class="relative bg-slate-200 p-2 sm:p-4 flex justify-center min-h-[600px]">
+                <!-- Loading Overlay -->
+                <div id="report-loading-overlay" class="absolute inset-0 bg-white/80 backdrop-blur-sm z-20 flex flex-col items-center justify-center space-y-3 transition-opacity duration-200">
+                    <div class="w-8 h-8 border-2 border-navy-800 border-t-amber-400 rounded-full animate-spin"></div>
+                    <div class="text-xs font-bold text-navy-900">Generating Official Suez Canal Tonnage Report Preview...</div>
+                    <div class="text-[11px] text-slate-500">Integrating transverse station areas, appendage calculations, and statutory deductions</div>
+                </div>
+
+                <!-- Paper Frame Wrapper -->
+                <div id="preview-paper-wrapper" class="w-full max-w-5xl bg-white shadow-2xl rounded-sm border border-slate-300 overflow-hidden" style="transition: transform 0.2s ease-out; transform-origin: top center;">
+                    <iframe id="report-preview-frame" class="w-full bg-white border-0" style="height: 820px;" src="about:blank" title="Official Suez Canal Tonnage Report Preview"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 Feature Cards (Downloads & File Management) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <!-- Option 1: PDF -->
+            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                    <div class="w-9 h-9 rounded-lg bg-red-100 text-red-700 flex items-center justify-center font-bold text-base mb-2">
+                        PDF
+                    </div>
+                    <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Multi-Page PDF Tables Report</h3>
+                    <p class="text-xs text-slate-600 mt-1">
+                        High-resolution printable multi-page report: Cover Page, Volume Table, 29 Transverse Stations, Bulbous Bow (4 tables), Forecastle, Hatchways, Round Houses, Gross Addition, and Net Deduction.
+                    </p>
+                </div>
+                <button onclick="exportPdfReport()" class="mt-4 w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-3 rounded-lg text-xs shadow flex items-center justify-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <span>Download PDF Report</span>
+                </button>
+            </div>
+
+            <!-- Option 2: HTML Printable -->
+            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                    <div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-base mb-2">
+                        HTML
+                    </div>
+                    <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Printable Tables Report</h3>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Clean, responsive, printable HTML document containing all structured engineering tables, ready for one-click browser printing or archiving.
+                    </p>
+                </div>
+                <button onclick="openReportNewTab()" class="mt-4 w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-lg text-xs shadow flex items-center justify-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    <span>Open Standalone Report</span>
+                </button>
+            </div>
+
+            <!-- Option 3: Master Excel -->
+            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
+                <div>
+                    <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-base mb-2">
+                        XLS
+                    </div>
+                    <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Master Suez Excel Workbook</h3>
+                    <p class="text-xs text-slate-600 mt-1">
+                        Complete 8-sheet Excel spreadsheet with 100% live formulas (SUM, IF, multiplication), dynamic links to Cover Summary, and pure ASCII English encoding.
+                    </p>
+                </div>
+                <button onclick="exportMasterExcel()" class="mt-4 w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 px-3 rounded-lg text-xs shadow flex items-center justify-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download Master Excel (.xlsx)</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-3.5 flex items-start space-x-3 text-xs text-amber-900">
+            <span class="font-bold text-base leading-none">&#9432;</span>
+            <div>
+                <strong>Export Folder:</strong> All exported reports and workbooks are saved in:
+                <code class="bg-amber-100/70 px-1.5 py-0.5 rounded font-mono text-amber-950">e:/Suaze tonnage calculator/Suez_Tonnage_Tool/exported_reports/</code>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
